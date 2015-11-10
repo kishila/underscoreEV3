@@ -9,17 +9,17 @@ public class ColorSensor extends EV3ColorSensor implements Sensor {
 	private SensorMode mode = this.getMode(2);
 
 	/**
-    *
-    * @return
-    */
+	 * ColorSensorのコンストラクタ
+     * @param Port SensorPort
+     */
 	public ColorSensor(Port port) {
 		super(port);
 	}
 
 	/**
-    *
-    * @return
-    */
+     * センサー値を取得
+     * @return float[] データが格納されたfloat型配列
+     */
 	public float[] getValue() {
 		float[] result = new float[mode.sampleSize()];
 		mode.fetchSample(result, 0);
