@@ -10,17 +10,17 @@ public class ColorIDSensor extends EV3ColorSensor implements Sensor {
 
 
 	/**
-    *
-    * @return
-    */
+	 * ColorIDSensorのコンストラクタ
+     * @param Port SensorPort
+     */
 	public ColorIDSensor(Port port) {
 		super(port);
 	}
 
 	/**
-    *
-    * @return
-    */
+     * センサー値を取得
+     * @return float[] データが格納されたfloat型配列
+     */
 	public float[] getValue() {
 		float[] result = new float[mode.sampleSize()];
 		mode.fetchSample(result, 0);
@@ -28,9 +28,9 @@ public class ColorIDSensor extends EV3ColorSensor implements Sensor {
 	}
 
 	/**
-    *
-    * @return
-    */
+     * 色を取得
+     * @return float 色が格納されたfloat型
+     */
 	public float[] getColor() {
 		return this.getValue();
 	}

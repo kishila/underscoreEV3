@@ -8,14 +8,18 @@ public class TouchSensor extends EV3TouchSensor implements Sensor {
 
 	private SensorMode mode = this.getMode(0);
 
+	/**
+	 * TouchSensorのコンストラクタ
+     * @param Port SensorPort
+     */
 	public TouchSensor(AnalogPort port) {
 		super(port);
 	}
 
 	/**
-    *
-    * @return
-    */
+     * センサー値を取得
+     * @return float[] データが格納されたfloat型配列
+     */
 	public float[] getValue() {
 		float[] result = new float[mode.sampleSize()];
 		mode.fetchSample(result, 0);
@@ -23,8 +27,8 @@ public class TouchSensor extends EV3TouchSensor implements Sensor {
 	}
 
     /**
-     * タッチセンサ押下のチェック
-     * @return true ならタッチセンサーが押された。
+     * タッチセンサの押下を取得
+     * @return boolean タッチセンサの状態が格納されたboolean型
      */
 	public boolean isPressed() {
 		float[] values = this.getValue();

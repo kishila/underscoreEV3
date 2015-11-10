@@ -9,17 +9,17 @@ public class UltrasonicSensor extends EV3UltrasonicSensor implements Sensor {
 	private SensorMode mode = this.getMode(0);
 
 	/**
-    *
-    * @return
-    */
+	 * UltrasonicSensorのコンストラクタ
+     * @param Port SensorPort
+     */
 	public UltrasonicSensor(Port port) {
 		super(port);
 	}
 
 	/**
-    *
-    * @return
-    */
+     * センサー値を取得
+     * @return float[] データが格納されたfloat型配列
+     */
 	public float[] getValue() {
 		float[] result = new float[mode.sampleSize()];
 		mode.fetchSample(result, 0);
@@ -27,10 +27,10 @@ public class UltrasonicSensor extends EV3UltrasonicSensor implements Sensor {
 	}
 
 	/**
-    *
-    * @return
-    */
-	public float getLight() {
+	* 距離の値を取得
+	* @return float 距離の値が格納されたfloat型
+	*/
+	public float getDistance() {
 		return this.getValue()[0];
 	}
 

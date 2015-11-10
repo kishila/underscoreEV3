@@ -27,33 +27,33 @@ public class ColorSensor extends EV3ColorSensor implements Sensor {
 	}
 
 	/**
-    *
-    * @return
-    */
+     * RGBを取得
+     * @return float RGBが格納されたfloat型配列
+     */
 	public float[] getRGB() {
 		return this.getValue();
 	}
 
 	/**
-    *
-    * @return
+    * RGBの赤成分を取得
+    * @return float RGBの赤成分が格納されたfloat型
     */
 	public float getRed() {
 		return this.getValue()[0];
 	}
 
 	/**
-    *
-    * @return
-    */
+	* RGBの緑成分を取得
+	* @return float RGBの緑成分が格納されたfloat型
+	*/
 	public float getGreen() {
 		return this.getValue()[1];
 	}
 
 	/**
-    *
-    * @return
-    */
+	* RGBの青成分を取得
+	* @return float RGBの青成分が格納されたfloat型
+	*/
 	public float getBlue() {
 		return this.getValue()[2];
 	}
