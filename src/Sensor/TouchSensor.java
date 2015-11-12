@@ -1,6 +1,6 @@
 package Sensor;
 
-import lejos.hardware.port.AnalogPort;
+import lejos.hardware.port.Port;
 import lejos.hardware.sensor.EV3TouchSensor;
 import lejos.hardware.sensor.SensorMode;
 
@@ -12,7 +12,7 @@ public class TouchSensor extends EV3TouchSensor implements Sensor {
 	 * TouchSensorのコンストラクタ
      * @param Port SensorPort
      */
-	public TouchSensor(AnalogPort port) {
+	public TouchSensor(Port port) {
 		super(port);
 	}
 
