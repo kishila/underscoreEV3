@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 import lejos.hardware.Button;
 import lejos.hardware.lcd.LCD;
 import lejos.utility.Delay;
+import project.task.BluetoothTask;
 import project.task.DriveTask;
 
 public class Main {
@@ -15,9 +16,11 @@ public class Main {
 	// スケジューラ
 	private ScheduledExecutorService scheduler;
     private ScheduledFuture<?> futureDrive;
+    private ScheduledFuture<?> futureBluetooth;
 
     // タスク
     private DriveTask  driveTask;
+    private BluetoothTask bluetoothTask;
 
     // フラグ
     private boolean buttonPressed;    // タッチセンサーが押されたかの状態
@@ -27,8 +30,10 @@ public class Main {
      * スケジューラとタスクオブジェクトを作成。
      */
     public Main() {
-    	scheduler  = Executors.newScheduledThreadPool(1);
+    	scheduler  = Executors.newScheduledThreadPool(2);
     	driveTask  = new DriveTask();
+    	bluetoothTask = new BluetoothTask();
+    	futureBluetooth = scheduler.scheduleAtFixedRate(bluetoothTask, 0, 100, TimeUnit.MILLISECONDS);
     }
 
     /**
@@ -45,7 +50,13 @@ public class Main {
                 res = false;
                 buttonPressed = false;     // ボタンが押された後に放した
             }
-        }        return res;
+        }
+
+        if (bluetoothTask.checkRemoteCommand(BluetoothTask.REMOTE_COMMAND_START)) {  // PC で 'g' キーが押された
+            res = false;
+        }
+
+        return res;
     }
 
     /**
@@ -61,6 +72,11 @@ public class Main {
                 buttonPressed = false;     // ボタンが押された後に放した
             }
         }
+
+        if (bluetoothTask.checkRemoteCommand(BluetoothTask.REMOTE_COMMAND_STOP)) { // PC で 's' キー押されたら走行終了
+            res = false;
+        }
+
         return res;
     }
 
@@ -78,6 +94,10 @@ public class Main {
         if (futureDrive != null) {
             futureDrive.cancel(true);
         }
+        if (futureBluetooth != null) {
+            futureBluetooth.cancel(true);
+            bluetoothTask.close();
+}
     }
 
     /**

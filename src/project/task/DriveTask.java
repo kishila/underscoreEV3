@@ -1,19 +1,16 @@
 package project.task;
 
-import java.util.Arrays;
-
 import lejos.hardware.lcd.LCD;
 import project.device.LeftMotor;
 import project.device.RightMotor;
 import project.device.SonarSensor;
-import project.http.Post;
 
 public class DriveTask implements Runnable {
 
 	RightMotor motorR = RightMotor.getInstance();
 	LeftMotor motorL = LeftMotor.getInstance();
 	SonarSensor sonar = SonarSensor.getInstance();
-	
+
 	private int lcdCount;
 
 	public DriveTask(){
